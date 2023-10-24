@@ -10,10 +10,15 @@ interface CartItemProps {
 }
 
 const CartItem = ({ product }: CartItemProps) => {
-  const { decreaseProductQuantity } = useContext(CartContext);
+  const { decreaseProductQuantity, increaseProductQuantity } =
+    useContext(CartContext);
 
   const handleDecreaseQuantityClick = () => {
     decreaseProductQuantity(product.id);
+  };
+
+  const handleIncreaseQuantityClick = () => {
+    increaseProductQuantity(product.id);
   };
 
   return (
@@ -30,7 +35,7 @@ const CartItem = ({ product }: CartItemProps) => {
           />
         </div>
         <div className="flex flex-col">
-          <p>{product.name}</p>
+          <p className="text-xs">{product.name}</p>
 
           <div className="flex items-center gap-2">
             <p className="text-sm font-bold">
@@ -55,7 +60,12 @@ const CartItem = ({ product }: CartItemProps) => {
 
             <span className="text-xs">{product.quantity}</span>
 
-            <Button size="icon" variant="outline" className="h-8 w-8">
+            <Button
+              size="icon"
+              variant="outline"
+              className="h-8 w-8"
+              onClick={handleIncreaseQuantityClick}
+            >
               <ChevronRightIcon size={16} />
             </Button>
           </div>
