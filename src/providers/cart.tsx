@@ -36,12 +36,13 @@ export const CartContext = createContext<ICartContext>({
 });
 
 const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [products, setProduct] = useState<CartProduct[]>([]);
+  const [products, setProducts] = useState<CartProduct[]>([]);
 
   useEffect(() => {
-    setProduct(
+    setProducts(
       JSON.parse(localStorage.getItem("@fsw-store/cart-products") || "[]"),
     );
+    console.log(products);
   }, []);
 
   useEffect(() => {
@@ -71,7 +72,7 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
     );
 
     if (productIsAlreadyOnCart) {
-      setProduct((prev) =>
+      setProducts((prev) =>
         prev.map((cartProduct) => {
           if (cartProduct.id === product.id) {
             return {
@@ -87,13 +88,13 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
     }
 
     // se nao, adicione o produto a lista
-    setProduct((prev) => [...prev, product]);
+    setProducts((prev) => [...prev, product]);
   };
 
   const decreaseProductQuantity = (productId: string) => {
     // se a quantidade  for 1, remova o produto do carrinho
     // se nao, diminua a quantidade
-    setProduct((prev) =>
+    setProducts((prev) =>
       prev
         .map((cartProduct) => {
           if (cartProduct.id === productId) {
@@ -112,7 +113,7 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
   const increaseProductQuantity = (productId: string) => {
     // se a quantidade  for 1, remova o produto do carrinho
     // se nao, diminua a quantidade
-    setProduct((prev) =>
+    setProducts((prev) =>
       prev.map((cartProduct) => {
         if (cartProduct.id === productId) {
           return {
@@ -127,7 +128,7 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const removeProductFromCart = (productId: string) => {
-    setProduct((prev) =>
+    setProducts((prev) =>
       prev.filter((cartProduct) => cartProduct.id !== productId),
     );
   };
