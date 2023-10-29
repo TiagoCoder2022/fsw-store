@@ -22,7 +22,7 @@ export const POST = async (request: Request) => {
   );
 
   if (event.type === "checkout.session.completed") {
-    // const session = event.data.object as any;
+    const session = event.data.object as any;
 
     const sessionWithLineItems = await stripe.checkout.sessions.retrieve(
       event.data.object.id,
@@ -32,17 +32,15 @@ export const POST = async (request: Request) => {
     );
     const lineItems = sessionWithLineItems.line_items;
 
-    console.log(lineItems);
-
-    // // ATUALIZAR PEDIDO
-    // await prismaClient.order.update({
-    //   where: {
-    //     id: session.metadata.orderId,
-    //   },
-    //   data: {
-    //     status: "PAYMENT_CONFIRMED",
-    //   },
-    // });
+    // ATUALIZAR PEDIDO
+    await prismaClient.order.update({
+      where: {
+        id: session.metadata.orderId,
+      },
+      data: {
+        status: "PAYMENT_CONFIRMED",
+      },
+    });
   }
 
   return NextResponse.json({ received: true });
