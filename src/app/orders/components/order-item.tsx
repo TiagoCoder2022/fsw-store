@@ -35,7 +35,11 @@ const OrderItem = ({ order }: OrderItemProps) => {
               <div className="flex items-center justify-between">
                 <div className="font-bold">
                   <p>Status</p>
-                  <p className="text-[#8162ff]">{order.status}</p>
+                  <p className="text-[#8162ff]">
+                    {order.status === "WAITING_FOR_PAYMENT"
+                      ? "Aguardando Pagamento"
+                      : "Pago"}
+                  </p>
                 </div>
 
                 <div>
