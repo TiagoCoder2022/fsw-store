@@ -11,6 +11,7 @@ import OrderProductItem from "./order-product-item";
 import { Separator } from "@/components/ui/separator";
 import { useMemo } from "react";
 import { computeProductTotalPrice } from "@/helpers/product";
+import getOrderStatus from "../helpers/status";
 
 interface OrderItemProps {
   order: Prisma.OrderGetPayload<{
@@ -59,9 +60,7 @@ const OrderItem = ({ order }: OrderItemProps) => {
                 <div className="font-bold">
                   <p>Status</p>
                   <p className="text-[#8162ff]">
-                    {order.status === "WAITING_FOR_PAYMENT"
-                      ? "Aguardando Pagamento"
-                      : "Pago"}
+                    {getOrderStatus(order.status)}
                   </p>
                 </div>
 
