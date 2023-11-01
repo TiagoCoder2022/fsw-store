@@ -12,15 +12,15 @@ const ProductItem = ({ product, className }: ProductItemProps) => {
   return (
     <Link
       href={`/product/${product.slug}`}
-      className={cn("flex min-w-[156px] flex-col gap-4", className)}
+      className={cn("flex min-w-[156px] flex-col gap-3", className)}
     >
-      <div className="relative flex aspect-square w-full items-center justify-center rounded-lg bg-accent">
+      <div className="relative flex aspect-square w-full  items-center  justify-center rounded-lg bg-accent hover:bg-[#121212] ">
         <Image
           src={product.imageUrls[0]}
           height={0}
           width={0}
           sizes="100vw"
-          className="h-auto max-h-[70%] w-auto max-w-[80%] object-contain"
+          className="h-auto max-h-[70%] w-auto max-w-[80%] transform object-contain duration-300 motion-safe:hover:scale-110"
           alt={product.name}
         />
 
@@ -47,10 +47,9 @@ const ProductItem = ({ product, className }: ProductItemProps) => {
             </>
           ) : (
             <p className="truncate text-sm font-semibold">
-              R$ {product.basePrice.toFixed(2)}
+              R$ {product.basePrice.toString()}
             </p>
           )}
-          <p>{}</p>
         </div>
       </div>
     </Link>
