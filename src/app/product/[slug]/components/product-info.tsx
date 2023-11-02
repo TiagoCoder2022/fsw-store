@@ -31,9 +31,10 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
   const handleAddToCartClick = () => {
     addProductToCart({ ...product, quantity });
   };
+
   return (
-    <div className="flex flex-col px-5">
-      <h2 className="text-lg">{product.name}</h2>
+    <div className="flex flex-col px-5 lg:w-[40%] lg:rounded-lg lg:bg-accent lg:p-10">
+      <h2 className="text-lg lg:text-2xl">{product.name}</h2>
 
       <div className="flex items-center gap-2">
         <h1 className="text-xl font-bold">
@@ -81,7 +82,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
         Adicionar ao carrinho
       </Button>
 
-      <div className="mt-6 flex items-center justify-between rounded-lg bg-accent px-5 py-2">
+      <div className="mt-6 flex items-center justify-between rounded-lg bg-accent px-5 py-2 lg:bg-[#2A2A2A]">
         <div className="flex items-center gap-2">
           <TruckIcon />
 
