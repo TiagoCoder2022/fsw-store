@@ -47,16 +47,16 @@ const ProductList = ({ products }: ProductListProps) => {
       {products.length > 6 && (
         <div className="hidden lg:block">
           <Button
-            className="absolute left-[calc(-2.5rem/2)] top-[40%] flex h-[50px] w-[50px] -translate-x-0 translate-y-[-50%] cursor-pointer place-items-center items-center justify-center rounded-full bg-primary text-2xl "
+            className="absolute left-[calc(-2.5rem/2)] top-[40%] flex h-[50px] w-[50px] -translate-x-0 translate-y-[-50%] cursor-pointer place-items-center items-center justify-center rounded-full bg-primary p-2 text-2xl"
             onClick={handleLeftClick}
           >
-            <ChevronLeftIcon size={46} />
+            <ChevronLeftIcon size={30} />
           </Button>
           <Button
-            className="absolute right-[calc(-2.5rem/2)] top-[40%] flex h-[50px] w-[50px] -translate-x-0 translate-y-[-50%] cursor-pointer place-items-center items-center justify-center rounded-full bg-primary text-2xl "
+            className="absolute right-[calc(-2.5rem/2)] top-[40%] flex h-[50px] w-[50px] -translate-x-0 translate-y-[-50%] cursor-pointer place-items-center items-center justify-center rounded-full bg-primary p-2 text-2xl"
             onClick={handleRightClick}
           >
-            <ChevronRightIcon size={46} />
+            <ChevronRightIcon size={30} />
           </Button>
         </div>
       )}
