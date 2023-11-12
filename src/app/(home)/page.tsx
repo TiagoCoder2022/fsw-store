@@ -88,7 +88,7 @@ export default async function Home() {
           <Link href="/catalog">
             <PromoBanner
               src="/free-shipping-banner.png"
-              alt="Até 55% de desconto em mouses!"
+              alt="Frete grátis para todo Brasil"
               className="hidden px-5 lg:block"
             />
           </Link>
