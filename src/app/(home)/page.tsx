@@ -1,10 +1,11 @@
-import Image from "next/image";
+import { useState } from "react";
 import Categories from "./components/categories";
 import { prismaClient } from "@/lib/prisma";
 import ProductList from "../../components/ui/product-list";
 import SectionTitle from "../../components/ui/section-title";
 import PromoBanner from "./components/promo-banner";
 import Link from "next/link";
+import PromoBannerSlider from "./components/promo-banner-slider";
 
 export default async function Home() {
   const deals = await prismaClient.product.findMany({
@@ -32,24 +33,16 @@ export default async function Home() {
   });
   return (
     <>
-      <div className="mx-auto max-w-[1920px]">
-        <Link href="/deals">
-          <PromoBanner
-            src="/deals-banner.png"
-            alt="Até 55% de desconto esse mês!"
-            className="hidden h-auto w-full lg:block"
-          />
-        </Link>
-      </div>
+      <PromoBannerSlider />
 
       <div className="mx-auto flex flex-col gap-8 py-8 lg:container lg:gap-10">
-        <Link href="/deals">
+        {/**<Link href="/deals">
           <PromoBanner
             src="/banner-home-01.png"
             alt="Até 55% de desconto esse mês!"
             className="px-5 lg:hidden"
           />
-        </Link>
+        </Link>**/}
 
         <div className="px-5 lg:mt-2">
           <Categories />
