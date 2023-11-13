@@ -14,7 +14,7 @@ const OrderProductItem = ({ orderProduct }: OrderProductItemProps) => {
   const productWithTotalPrice = computeProductTotalPrice(orderProduct.product);
   return (
     <div className="flex items-center gap-4">
-      <div className="w- item-center flex h-[77px] w-[100px] items-center justify-center rounded-lg bg-accent">
+      <div className=" item-center flex h-[77px] w-[100px] items-center justify-center rounded-lg bg-accent lg:h-[130px] lg:w-[150px]">
         <Image
           src={orderProduct.product.imageUrls[0]}
           width={0}
@@ -26,8 +26,8 @@ const OrderProductItem = ({ orderProduct }: OrderProductItemProps) => {
       </div>
 
       <div className="flex w-full flex-col gap-2">
-        <div className="flex w-fit rounded-md bg-accent px-3 py-1">
-          <p className="text-[10px]">
+        <div className="flex w-fit rounded-md bg-accent px-3 py-1 lg:py-2">
+          <p className="text-[10px] lg:text-sm">
             Vendido e entregue por <span className="font-bold">FSW Store</span>
           </p>
         </div>
@@ -47,7 +47,9 @@ const OrderProductItem = ({ orderProduct }: OrderProductItemProps) => {
             )}
           </div>
 
-          <p className="text-xs opacity-60">Qntd: {orderProduct.quantity}</p>
+          <p className="text-xs opacity-60 lg:text-base">
+            Qntd: {orderProduct.quantity}
+          </p>
         </div>
       </div>
     </div>
