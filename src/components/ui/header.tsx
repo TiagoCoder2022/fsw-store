@@ -51,7 +51,7 @@ const Header = () => {
   };
   return (
     <>
-      <header className="container hidden w-full items-center py-5 align-middle md:block lg:block">
+      <header className="fixed top-0 z-50 hidden w-full items-center bg-background px-10 py-5 align-middle shadow-lg shadow-[#2A0E61]/50 md:block lg:block">
         <div className="flex flex-row justify-between">
           <div className="flex flex-row pt-1">
             <Link href="/">
