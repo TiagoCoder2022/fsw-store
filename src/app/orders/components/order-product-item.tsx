@@ -13,8 +13,8 @@ interface OrderProductItemProps {
 const OrderProductItem = ({ orderProduct }: OrderProductItemProps) => {
   const productWithTotalPrice = computeProductTotalPrice(orderProduct.product);
   return (
-    <div className="flex items-center gap-4">
-      <div className=" item-center flex h-[77px] w-[100px] items-center justify-center rounded-lg bg-accent lg:h-[130px] lg:w-[150px]">
+    <div className="relative flex items-center gap-4">
+      <div className="flex h-[77px] w-[100px] items-center justify-center rounded-lg bg-accent lg:h-[130px] lg:w-[150px]">
         <Image
           src={orderProduct.product.imageUrls[0]}
           width={0}
