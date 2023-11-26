@@ -2,14 +2,11 @@
 
 import { Button } from "@/components/ui/button";
 import DiscountBadge from "@/components/ui/discount-badge";
+import { useToast } from "@/components/ui/use-toast";
 import { ProductWithTotalPrice } from "@/helpers/product";
 import { CartContext } from "@/providers/cart";
-import {
-  ArrowDown,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  TruckIcon,
-} from "lucide-react";
+import { HeartIcon } from "lucide-react";
+import { ChevronLeftIcon, ChevronRightIcon, TruckIcon } from "lucide-react";
 import { useContext, useState } from "react";
 
 interface ProductInfoProps {
@@ -17,6 +14,10 @@ interface ProductInfoProps {
 }
 const ProductInfo = ({ product }: ProductInfoProps) => {
   const [quantity, setQuantity] = useState(1);
+
+  const { toast } = useToast();
+
+  const { addProductToWishList } = useContext(CartContext);
 
   const { addProductToCart } = useContext(CartContext);
 
@@ -28,20 +29,37 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
     setQuantity((prev) => prev + 1);
   };
 
+  const handleAddToWishList = () => {
+    addProductToWishList({ ...product, quantity });
+    toast({
+      title: "Sucesso!",
+      description: "Item adicionado aos Favoritos",
+    });
+  };
+
   const handleAddToCartClick = () => {
     addProductToCart({ ...product, quantity });
+    toast({
+      title: "Sucesso!",
+      description: "Item adicionado ao carrinho",
+    });
   };
 
   return (
     <div className="flex flex-col px-5 lg:w-[40%] lg:rounded-lg lg:bg-accent lg:p-10">
-      <h2 className="text-lg lg:text-2xl">{product.name}</h2>
+      <div className="flex justify-between">
+        <h2 className="text-lg lg:text-2xl">{product.name}</h2>
+        <div className=" bottom-3 right-3 cursor-pointer">
+          <HeartIcon onClick={handleAddToWishList} size={24} />
+        </div>
+      </div>
 
       <div className="flex items-center gap-2">
         <h1 className="text-xl font-bold">
           R$ {product.totalPrice.toFixed(2)}
         </h1>
         {product.discountPercentage > 0 && (
-          <DiscountBadge>{product.discountPercentage}%</DiscountBadge>
+          <DiscountBadge>{product.discountPercentage}</DiscountBadge>
         )}
       </div>
       {product.discountPercentage > 0 && (
