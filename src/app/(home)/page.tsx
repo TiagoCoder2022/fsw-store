@@ -36,14 +36,6 @@ export default async function Home() {
       <PromoBannerSlider />
 
       <div className="mx-auto flex flex-col gap-8 py-8 lg:container lg:gap-10">
-        {/**<Link href="/deals">
-          <PromoBanner
-            src="/banner-home-01.png"
-            alt="Até 55% de desconto esse mês!"
-            className="px-5 lg:hidden"
-          />
-        </Link>**/}
-
         <div className="px-5 lg:mt-2">
           <Categories />
         </div>
