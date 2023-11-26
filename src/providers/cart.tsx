@@ -6,8 +6,12 @@ import { ReactNode, createContext, useState, useMemo, useEffect } from "react";
 export interface CartProduct extends ProductWithTotalPrice {
   quantity: number;
 }
+export interface WishProduct extends ProductWithTotalPrice {
+  quantity: number;
+}
 
 interface ICartContext {
+  wishlist: CartProduct[];
   products: CartProduct[];
   cartTotalPrice: number;
   cartBasePrice: number;
@@ -16,12 +20,15 @@ interface ICartContext {
   subtotal: number;
   totaldiscount: number;
   addProductToCart: (product: CartProduct) => void;
+  addProductToWishList: (product: CartProduct) => void;
   decreaseProductQuantity: (productId: string) => void;
   increaseProductQuantity: (productId: string) => void;
   removeProductFromCart: (productId: string) => void;
+  removeProductFromWishlist: (productId: string) => void;
 }
 
 export const CartContext = createContext<ICartContext>({
+  wishlist: [],
   products: [],
   cartTotalPrice: 0,
   cartBasePrice: 0,
@@ -30,24 +37,40 @@ export const CartContext = createContext<ICartContext>({
   subtotal: 0,
   totaldiscount: 0,
   addProductToCart: () => {},
+  addProductToWishList: () => {},
   decreaseProductQuantity: () => {},
   increaseProductQuantity: () => {},
   removeProductFromCart: () => {},
+  removeProductFromWishlist: () => {},
 });
 
+const PRODUCTS_STORAGE_KEY = "@fsw-store/products";
+const PRODUCT_WISHLIST_KEY = "@fsw-store/wishlist";
+
 const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [products, setProducts] = useState<CartProduct[]>([]);
+  const [products, setProducts] = useState<CartProduct[]>(
+    JSON.parse(
+      (typeof localStorage !== "undefined" &&
+        localStorage.getItem(PRODUCTS_STORAGE_KEY)) ||
+        "[]",
+    ),
+  );
+  const [wishlist, setWishlist] = useState<CartProduct[]>(
+    JSON.parse(
+      (typeof localStorage !== "undefined" &&
+        localStorage.getItem(PRODUCT_WISHLIST_KEY)) ||
+        "[]",
+    ),
+  );
 
   useEffect(() => {
-    setProducts(
-      JSON.parse(localStorage.getItem("@fsw-store/cart-products") || "[]"),
-    );
-    console.log(products);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("@fsw-store/cart-products", JSON.stringify(products));
+    localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(products));
   }, [products]);
+
+  useEffect(() => {
+    // Atualize o localStorage sempre que a lista de desejos mudar
+    localStorage.setItem(PRODUCT_WISHLIST_KEY, JSON.stringify(wishlist));
+  }, [wishlist]);
 
   // Total sem descontos
   const subtotal = useMemo(() => {
@@ -91,6 +114,14 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
     setProducts((prev) => [...prev, product]);
   };
 
+  const addProductToWishList = (product: CartProduct) => {
+    //se o produto já estiver no carrinho, apenas aumente a sua quantidade
+
+    // se nao, adicione o produto a lista
+    setWishlist((prev) => [...prev, product]);
+    console.log(wishlist);
+  };
+
   const decreaseProductQuantity = (productId: string) => {
     // se a quantidade  for 1, remova o produto do carrinho
     // se nao, diminua a quantidade
@@ -132,14 +163,23 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
       prev.filter((cartProduct) => cartProduct.id !== productId),
     );
   };
+
+  const removeProductFromWishlist = (productId: string) => {
+    setWishlist((prev) =>
+      prev.filter((wishlistProduct) => wishlistProduct.id !== productId),
+    );
+  };
   return (
     <CartContext.Provider
       value={{
+        wishlist,
         products,
         addProductToCart,
+        addProductToWishList,
         decreaseProductQuantity,
         increaseProductQuantity,
         removeProductFromCart,
+        removeProductFromWishlist,
         total,
         subtotal,
         totaldiscount,
