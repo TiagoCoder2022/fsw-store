@@ -116,6 +116,25 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const addProductToWishList = (product: CartProduct) => {
     //se o produto já estiver no carrinho, apenas aumente a sua quantidade
+    const productIsAlreadyOnWishList = wishlist.some(
+      (wishProduct) => wishProduct.id === product.id,
+    );
+
+    if (productIsAlreadyOnWishList) {
+      setWishlist((prev) =>
+        prev.map((wishProduct) => {
+          if (wishProduct.id === product.id) {
+            return {
+              ...wishProduct,
+              quantity: wishProduct.quantity + product.quantity,
+            };
+          }
+          return wishProduct;
+        }),
+      );
+
+      return;
+    }
 
     // se nao, adicione o produto a lista
     setWishlist((prev) => [...prev, product]);
