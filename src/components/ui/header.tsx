@@ -152,7 +152,7 @@ const Header = () => {
             </li>
           </ul>
         </div>
-      </Card>      
+      </Card>
 
       <Card className=" flex items-center justify-between p-[1.875rem] md:hidden">
         <Sheet>
@@ -223,29 +223,33 @@ const Header = () => {
                 </Link>
               </SheetClose>
 
-              <SheetClose asChild>
-                <Link href="/orders">
-                  <Button
-                    variant="outline"
-                    className="w-full justify-start gap-2"
-                  >
-                    <PackageSearchIcon size={16} />
-                    Meus Pedidos
-                  </Button>
-                </Link>
-              </SheetClose>
+              {status === "authenticated" ? (
+                <SheetClose asChild>
+                  <Link href="/orders">
+                    <Button
+                      variant="outline"
+                      className="w-full justify-start gap-2"
+                    >
+                      <PackageSearchIcon size={16} />
+                      Meus Pedidos
+                    </Button>
+                  </Link>
+                </SheetClose>
+              ) : null}
 
-              <SheetClose asChild>
-                <Link href="/wishlist">
-                  <Button
-                    variant="outline"
-                    className="w-full justify-start gap-2"
-                  >
-                    <HeartIcon size={16} />
-                    Meus Favoritos
-                  </Button>
-                </Link>
-              </SheetClose>
+              {status === "authenticated" ? (
+                <SheetClose asChild>
+                  <Link href="/wishlist">
+                    <Button
+                      variant="outline"
+                      className="w-full justify-start gap-2"
+                    >
+                      <HeartIcon size={16} />
+                      Meus Favoritos
+                    </Button>
+                  </Link>
+                </SheetClose>
+              ) : null}
 
               <SheetClose asChild>
                 <Link href="/deals">
