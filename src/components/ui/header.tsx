@@ -9,6 +9,8 @@ import {
   HomeIcon,
   PackageSearchIcon,
   SearchIcon,
+  HeartIcon,
+  User,
 } from "lucide-react";
 import { Button } from "./button";
 import { Card } from "./card";
@@ -51,100 +53,106 @@ const Header = () => {
   };
   return (
     <>
-      <header className="fixed top-0 z-50 hidden w-full items-center bg-background px-10 py-5 align-middle shadow-lg shadow-[#2A0E61]/50 md:block lg:block">
-        <div className="flex flex-row justify-between">
-          <div className="flex flex-row pt-1">
+      <Card className=" fixed top-0 z-50 hidden h-28 w-full bg-background tracking-[0.22px] shadow-lg shadow-[#2A0E61]/50 md:block lg:block">
+        <div className="container mx-auto flex flex-row items-center justify-between py-10 text-sm lg:text-base">
+          <div>
             <Link href="/">
               <h1 className="text-base font-semibold lg:text-lg">
                 <span className="text-primary">FSW</span> Store
               </h1>
             </Link>
           </div>
-
-          <div className="flex flex-row text-sm lg:text-base">
-            <div className="pt-2">
-              <SearchIcon className="mr-6 inline-block md:mr-4" />
-
+          <ul className="hidden flex-row items-center justify-end gap-8 md:flex lg:gap-10">
+            <li>
               <a
                 href="/"
-                className="mr-6 text-white hover:text-primary md:mr-4"
+                className=" text-white transition duration-300 hover:text-primary"
               >
                 Início
               </a>
-              <a
-                href="/orders"
-                className="mr-6 text-white hover:text-primary md:mr-4"
-              >
-                Meus Pedidos
-              </a>
+            </li>
+            <li>
               <a
                 href="/deals"
-                className="mr-6 text-white hover:text-primary md:mr-4"
+                className=" text-white transition duration-300 hover:text-primary"
               >
                 Ofertas
               </a>
+            </li>
+            <li>
               <a
                 href="/catalog"
-                className="mr-6 text-white hover:text-primary md:mr-4"
+                className=" text-white transition duration-300 hover:text-primary"
               >
                 Catálogo
               </a>
-            </div>
-
-            <div className="mr-6 md:mr-4">
+            </li>
+            <li>
               {status === "authenticated" && data?.user ? (
                 <NavigationMenu>
                   <NavigationMenuList>
                     <NavigationMenuItem>
                       <NavigationMenuTrigger>
-                        <p className="font-semibold">
+                        <p className="text-sm ">
                           <span className="opacity-75">Olá</span>{" "}
                           {data.user.name}!
                         </p>
                       </NavigationMenuTrigger>
                       <NavigationMenuContent>
                         <NavigationMenuLink>
-                          <Button
+                          <a
+                            href="/orders"
+                            className="whitespace-no-wrap flex w-full items-center justify-center gap-2 truncate px-[22px] py-3 text-sm hover:bg-accent"
+                          >
+                            Meus Pedidos
+                          </a>
+                          <a
+                            href="/wishlist"
+                            className="whitespace-no-wrap flex w-full items-center justify-center gap-2 truncate px-[22px] py-3 text-sm hover:bg-accent"
+                          >
+                            Meus Favoritos
+                          </a>
+                          <a
                             onClick={handleLogoutClick}
-                            variant="outline"
-                            className="whitespace-no-wrap flex w-full items-center justify-center gap-2 truncate px-[22px] py-3 text-sm"
+                            className="whitespace-no-wrap flex w-full cursor-pointer items-center justify-center gap-2 truncate px-[22px] py-3 text-sm hover:bg-accent"
                           >
                             Fazer Logout
                             <LogOutIcon size={16} />
-                          </Button>
+                          </a>
                         </NavigationMenuLink>
                       </NavigationMenuContent>
                     </NavigationMenuItem>
                   </NavigationMenuList>
                 </NavigationMenu>
               ) : (
-                <div className="pt-2">
+                <div>
                   <a
                     onClick={handleLoginClick}
-                    className="whitespace-no-wrap cursor-pointer justify-start gap-2 rounded-md px-5 py-3  text-sm transition duration-300 hover:bg-accent lg:text-base"
+                    className="whitespace-no-wrap h-10 cursor-pointer rounded-md px-4 py-3 text-sm transition duration-300 hover:bg-accent lg:text-base"
                   >
-                    <LogInIcon size={16} className="mr-2 inline-block" />
-                    Fazer Login
+                    <User className="mr-2 inline-block" size={16} />
+                    <span>Fazer Login</span>
                   </a>
                 </div>
               )}
-            </div>
+            </li>
+            <li className="">
+              <Sheet>
+                <SheetTrigger>
+                  <a className="rounded-full bg-primary px-5 py-3 text-white md:text-sm">
+                    <ShoppingCartIcon className="mr-2 inline-block" />
+                    Cart ({cartQuantityItems})
+                  </a>
+                </SheetTrigger>
 
-            <Sheet>
-              <SheetTrigger>
-                <a className="rounded-full bg-primary px-5 py-3 text-white md:text-sm">
-                  <ShoppingCartIcon className="mr-2 inline-block" />
-                  Cart ({cartQuantityItems})
-                </a>
-              </SheetTrigger>
-
-              <SheetContent className="w-[350px] lg:w-[600px] lg:max-w-[600px]">
-                <Cart />
-              </SheetContent>
-            </Sheet>
-          </div>
+                <SheetContent className="w-[350px] lg:w-[600px] lg:max-w-[600px]">
+                  <Cart />
+                </SheetContent>
+              </Sheet>
+            </li>
+          </ul>
         </div>
-      </header>
+      </Card>      
 
       <Card className=" flex items-center justify-between p-[1.875rem] md:hidden">
         <Sheet>
@@ -223,6 +231,18 @@ const Header = () => {
                   >
                     <PackageSearchIcon size={16} />
                     Meus Pedidos
+                  </Button>
+                </Link>
+              </SheetClose>
+
+              <SheetClose asChild>
+                <Link href="/wishlist">
+                  <Button
+                    variant="outline"
+                    className="w-full justify-start gap-2"
+                  >
+                    <HeartIcon size={16} />
+                    Meus Favoritos
                   </Button>
                 </Link>
               </SheetClose>
