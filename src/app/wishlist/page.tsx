@@ -1,20 +1,29 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { CartContext } from "@/providers/cart";
 import { Badge } from "@/components/ui/badge";
 import { computeProductTotalPrice } from "@/helpers/product";
 import { HeartIcon } from "lucide-react";
 import WishProduct from "./components/wish-product";
+import Loading from "./components/loading";
 
 const WishList = () => {
+  const [loading, setLoading] = useState(true);
+
   const handleremoveProductFromCartClick = () => {
     //removeProductFromCart(product.id);
   };
+  const { wishlist } = useContext(CartContext);
+
+  useEffect(() => {
+    // Simule uma requisição assíncrona para obter os dados da wishlist
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000); // Tempo de simulação de carregamento (pode ser substituído por uma chamada de API real)
+  }, []);
 
   const { data } = useSession();
-
-  const { wishlist, products } = useContext(CartContext);
 
   return (
     <div className="container mx-auto p-5">
@@ -26,7 +35,9 @@ const WishList = () => {
         Favoritos
       </Badge>
       <div className="m-auto flex h-full w-full max-w-5xl flex-col gap-4 py-6">
-        {wishlist.length > 0 ? (
+        {loading ? (
+          <Loading />
+        ) : wishlist.length > 0 ? (
           wishlist.map((product) => (
             <WishProduct
               key={product.id}
