@@ -7,19 +7,30 @@ import { ProductWithTotalPrice } from "@/helpers/product";
 import { CartContext } from "@/providers/cart";
 import { HeartIcon } from "lucide-react";
 import { ChevronLeftIcon, ChevronRightIcon, TruckIcon } from "lucide-react";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 
 interface ProductInfoProps {
   product: ProductWithTotalPrice;
 }
 const ProductInfo = ({ product }: ProductInfoProps) => {
   const [quantity, setQuantity] = useState(1);
+  const [isInWishlist, setIsInWishlist] = useState(false);
 
   const { toast } = useToast();
 
-  const { addProductToWishList } = useContext(CartContext);
+  const {
+    addProductToCart,
+    addProductToWishList,
+    removeProductFromWishlist,
+    wishlist,
+  } = useContext(CartContext);
 
-  const { addProductToCart } = useContext(CartContext);
+  useEffect(() => {
+    // Verificar se o produto já está na wishlist
+    setIsInWishlist(
+      wishlist.some((wishlistItem) => wishlistItem.id === product.id),
+    );
+  }, [wishlist, product.id]);
 
   const handleDecreaseQuantityClick = () => {
     setQuantity((prev) => (prev === 1 ? prev : prev - 1));
@@ -30,11 +41,23 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
   };
 
   const handleAddToWishList = () => {
-    addProductToWishList({ ...product, quantity });
-    toast({
-      title: "Sucesso!",
-      description: "Item adicionado aos Favoritos",
-    });
+    if (isInWishlist) {
+      // Se o produto já está na wishlist, remova-o
+      removeProductFromWishlist(product.id);
+      setIsInWishlist(false);
+      toast({
+        title: "Sucesso!",
+        description: "Item removido dos Favoritos",
+      });
+    } else {
+      // Se o produto não está na wishlist, adicione-o
+      addProductToWishList({ ...product, quantity });
+      setIsInWishlist(true);
+      toast({
+        title: "Sucesso!",
+        description: "Item adicionado aos Favoritos",
+      });
+    }
   };
 
   const handleAddToCartClick = () => {
@@ -50,7 +73,12 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
       <div className="flex justify-between">
         <h2 className="text-lg lg:text-2xl">{product.name}</h2>
         <div className=" bottom-3 right-3 cursor-pointer">
-          <HeartIcon onClick={handleAddToWishList} size={24} />
+          <HeartIcon
+            onClick={handleAddToWishList}
+            fill={isInWishlist ? "#BA0001" : "none"}
+            color={isInWishlist ? "#BA0001" : "white"}
+            size={24}
+          />
         </div>
       </div>
 
