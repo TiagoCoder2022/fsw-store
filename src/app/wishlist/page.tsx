@@ -1,6 +1,5 @@
 "use client";
 import React, { useContext, useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
 import { CartContext } from "@/providers/cart";
 import { Badge } from "@/components/ui/badge";
 import { computeProductTotalPrice } from "@/helpers/product";
@@ -11,19 +10,14 @@ import Loading from "./components/loading";
 const WishList = () => {
   const [loading, setLoading] = useState(true);
 
-  const handleremoveProductFromCartClick = () => {
-    //removeProductFromCart(product.id);
-  };
   const { wishlist } = useContext(CartContext);
 
   useEffect(() => {
-    // Simule uma requisição assíncrona para obter os dados da wishlist
+    // Aguarda 2 segundos para que os produtos sejam carregados
     setTimeout(() => {
       setLoading(false);
-    }, 2000); // Tempo de simulação de carregamento (pode ser substituído por uma chamada de API real)
+    }, 2000);
   }, []);
-
-  const { data } = useSession();
 
   return (
     <div className="container mx-auto p-5">
