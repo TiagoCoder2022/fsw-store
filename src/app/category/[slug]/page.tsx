@@ -1,6 +1,5 @@
 import { prismaClient } from "@/lib/prisma";
 import { Badge } from "@/components/ui/badge";
-import { MouseIcon } from "lucide-react";
 import ProductItem from "@/components/ui/product-item";
 import { computeProductTotalPrice } from "@/helpers/product";
 import { CATEGORY_ICON } from "@/constants/category-icon";
@@ -20,7 +19,7 @@ const CategoryProducts = async ({ params }: any) => {
   }
 
   return (
-    <div className="flex flex-col gap-8 p-5">
+    <div className="mx-auto flex flex-col gap-8 p-5 lg:container lg:gap-10 lg:py-10">
       <Badge
         className="w-fit gap-1 border-2 border-primary px-3 py-[0.375rem] text-base uppercase"
         variant="outline"
@@ -28,7 +27,7 @@ const CategoryProducts = async ({ params }: any) => {
         {CATEGORY_ICON[params.slug as keyof typeof CATEGORY_ICON]}
         {category?.name}
       </Badge>
-      <div className="grid grid-cols-2 gap-8">
+      <div className="grid grid-cols-2 gap-8 lg:grid-cols-6">
         {category.products.map((product) => (
           <ProductItem
             key={product.id}
