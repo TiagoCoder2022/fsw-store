@@ -25,6 +25,7 @@ interface ICartContext {
   increaseProductQuantity: (productId: string) => void;
   removeProductFromCart: (productId: string) => void;
   removeProductFromWishlist: (productId: string) => void;
+  clearCart: () => void;
 }
 
 export const CartContext = createContext<ICartContext>({
@@ -42,6 +43,7 @@ export const CartContext = createContext<ICartContext>({
   increaseProductQuantity: () => {},
   removeProductFromCart: () => {},
   removeProductFromWishlist: () => {},
+  clearCart: () => {},
 });
 
 const PRODUCTS_STORAGE_KEY = "@fsw-store/products";
@@ -62,6 +64,10 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
         "[]",
     ),
   );
+
+  const clearCart = () => {
+    setProducts([]);
+  };
 
   useEffect(() => {
     localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(products));
@@ -193,6 +199,7 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
       value={{
         wishlist,
         products,
+        clearCart,
         addProductToCart,
         addProductToWishList,
         decreaseProductQuantity,
