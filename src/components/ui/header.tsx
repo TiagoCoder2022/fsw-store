@@ -139,7 +139,7 @@ const Header = () => {
             <li className="">
               <Sheet>
                 <SheetTrigger>
-                  <a className="rounded-full bg-primary px-5 py-3 text-white md:text-sm">
+                  <a className="rounded-full bg-primary px-5 py-3 text-white hover:bg-primary/90 md:text-sm">
                     <ShoppingCartIcon className="mr-2 inline-block" />
                     Cart ({cartQuantityItems})
                   </a>
