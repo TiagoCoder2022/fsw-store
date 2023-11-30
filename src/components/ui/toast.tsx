@@ -92,7 +92,7 @@ const ToastTitle = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof ToastPrimitives.Title>
 >(({ className, ...props }, ref) => (
   <div className="flex flex-row gap-2">
-    <CheckCircle2 fill="#0000FF" />
+    <CheckCircle2 fill="#3232ff" />
     <ToastPrimitives.Title
       ref={ref}
       className={cn("text-sm font-semibold", className)}
