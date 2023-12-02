@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import DiscountBadge from "./discount-badge";
 import { cn } from "@/lib/utils";
+import ProductItemImg from "./product-item-img";
 
 interface ProductItemProps {
   product: ProductWithTotalPrice;
@@ -14,15 +15,8 @@ const ProductItem = ({ product, className }: ProductItemProps) => {
       href={`/product/${product.slug}`}
       className={cn("flex min-w-[156px] flex-col gap-3", className)}
     >
-      <div className="relative flex aspect-square w-full  items-center  justify-center rounded-lg bg-accent hover:bg-[#121212] ">
-        <Image
-          src={product.imageUrls[0]}
-          height={0}
-          width={0}
-          sizes="100vw"
-          className="h-auto max-h-[70%] w-auto max-w-[80%] transform object-contain duration-300 motion-safe:hover:scale-110"
-          alt={product.name}
-        />
+      <div className="relative">
+        <ProductItemImg src={product.imageUrls[0]} alt={product.name} />
 
         {product.discountPercentage > 0 && (
           <DiscountBadge className="absolute left-3 top-3">
