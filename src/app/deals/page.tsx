@@ -15,10 +15,7 @@ const DealsPage = async () => {
 
   return (
     <div className="container mx-auto p-5">
-      <Badge
-        className="w-fit gap-1 border-2 border-primary px-3 py-[0.375rem] text-base uppercase"
-        variant="outline"
-      >
+      <Badge variant="heading">
         <PercentIcon size={16} />
         Ofertas
       </Badge>
