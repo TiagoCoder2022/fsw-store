@@ -50,10 +50,10 @@ async function main() {
         description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id malesuada elit, eget vulputate justo. Sed sollicitudin velit dolor, ut gravida odio iaculis a.\nNulla risus justo, tempor eu felis eu, efficitur pulvinar risus. Sed viverra, nisi id egestas convallis, massa lorem convallis magna, vel convallis mi turpis nec ante. Maecenas posuere lacus id gravida dignissim. Morbi sit amet rutrum ex. Duis sit amet sem orci. Morbi non nisl sed mauris mattis ullamcorper quis eget metus.\nUt pellentesque ornare erat, vitae blandit ex pulvinar sit amet. Ut pellentesque lorem at eros vestibulum lobortis. Proin bibendum est facilisis nulla tristique vestibulum. Etiam placerat tortor sit amet lacinia volutpat. Curabitur lectus turpis, faucibus vitae tortor in, lacinia tristique neque.",
         imageUrls: [
-          "https://res.cloudinary.com/dxzickkey/image/upload/v1706241202/01_mx-master-3s_re3w7n.webp",
-          "https://res.cloudinary.com/dxzickkey/image/upload/v1706241202/02_mx-master-3s_z7zoqo.webp",
-          "https://res.cloudinary.com/dxzickkey/image/upload/v1706241202/03_mx-master-3s_nn1flw.webp",
-          "https://res.cloudinary.com/dxzickkey/image/upload/v1706241202/04_mx-master-3s_aaonuf.webp",
+          "https://res.cloudinary.com/dxzickkey/image/upload/v1706241141/fsw-store/01_hyperx-dart_brlo1g.webp",
+          "https://res.cloudinary.com/dxzickkey/image/upload/v1706241141/fsw-store/02_hyperx-dart_rguahe.webp",
+          "https://res.cloudinary.com/dxzickkey/image/upload/v1706241141/fsw-store/03_hyperx-dart_skuuky.webp",
+          "https://res.cloudinary.com/dxzickkey/image/upload/v1706241141/fsw-store/04_hyperx-dart_d8m560.webp",
         ],
         basePrice: 650,
         categoryId: mousesCategory.id,
