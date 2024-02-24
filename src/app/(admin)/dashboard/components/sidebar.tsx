@@ -35,14 +35,32 @@ const Sidebar = () => {
             Produtos
           </Button>
         </Link>
-        <Button variant="outline" className="flex w-full justify-start gap-2">
-          <ListOrderedIcon size={16} />
-          Categorias
-        </Button>
-        <Button variant="outline" className="flex w-full justify-start gap-2">
-          <PackageSearchIcon size={16} />
-          Pedidos
-        </Button>
+
+        <Link href="/dashboard/categories">
+          <Button
+            variant="outline"
+            className={`flex w-full justify-start gap-2 ${
+              path.includes("/products") &&
+              "bg-primary text-white hover:bg-primary"
+            }`}
+          >
+            <ListOrderedIcon size={16} />
+            Categorias
+          </Button>
+        </Link>
+
+        <Link href="/dashboard/products">
+          <Button
+            variant="outline"
+            className={`flex w-full justify-start gap-2 ${
+              path.includes("/products") &&
+              "bg-primary text-white hover:bg-primary"
+            }`}
+          >
+            <PackageSearchIcon size={16} />
+            Pedidos
+          </Button>
+        </Link>
       </div>
     </div>
   );
