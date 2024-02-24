@@ -34,8 +34,8 @@ const OrderItem = ({ order }: OrderItemProps) => {
 
   const total = useMemo(() => {
     return order.orderProducts.reduce((acc, product) => {
-      const productWithTotalPrice = computeProductTotalPrice(product.product);
-      return acc + productWithTotalPrice.totalPrice * product.quantity;
+      const productTotalPrice = computeProductTotalPrice(product.product);
+      return acc + productTotalPrice * product.quantity;
     }, 0);
   }, [order.orderProducts]);
 
