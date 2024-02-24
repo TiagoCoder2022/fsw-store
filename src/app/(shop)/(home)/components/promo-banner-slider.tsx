@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import { slides } from "../../../constants/cardData";
+import { slides } from "../../../../constants/cardData";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
