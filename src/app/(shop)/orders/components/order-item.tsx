@@ -46,7 +46,7 @@ const OrderItem = ({ order }: OrderItemProps) => {
       <Accordion type="single" className="w-full" collapsible>
         <AccordionItem value={order.id}>
           <AccordionTrigger>
-            <div className="flex w-full px-4 text-left">
+            <div className="flex w-full text-left">
               <div className="flex flex-1 flex-col gap-1 text-left">
                 <p className="text-sm font-bold uppercase lg:text-base">
                   Pedido com {order.orderProducts.length} produto(s)
@@ -78,25 +78,25 @@ const OrderItem = ({ order }: OrderItemProps) => {
           </AccordionTrigger>
 
           <AccordionContent>
-            <div className="flex flex-col gap-4 px-4">
-              <div className="flex items-center justify-between lg:hidden lg:text-base">
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center justify-between lg:hidden">
                 <div className="font-bold">
-                  <p>Status</p>
-                  <p className="text-[#8162ff]">
+                  <p className="text-xs lg:text-sm">Status</p>
+                  <p className="text-xs text-[#8162FF] lg:text-sm">
                     {getOrderStatus(order.status)}
                   </p>
                 </div>
 
                 <div>
-                  <p className="font-bold">Data</p>
-                  <p className="opacity-60">
-                    {format(order.createdAt, "dd/MM/y")}
+                  <p className="text-xs font-bold lg:text-sm">Data</p>
+                  <p className="text-xs opacity-60 lg:text-sm">
+                    {format(order.createdAt, "d/MM/y")}
                   </p>
                 </div>
 
                 <div>
-                  <p className="font-bold">Pagamento</p>
-                  <p className="opacity-60">Cartão</p>
+                  <p className="text-xs font-bold lg:text-sm">Pagamento</p>
+                  <p className="text-xs opacity-60 lg:text-sm">Cartão</p>
                 </div>
               </div>
 
@@ -107,31 +107,31 @@ const OrderItem = ({ order }: OrderItemProps) => {
                 />
               ))}
 
-              <div className="flex w-full flex-col gap-1 text-xs lg:text-sm">
+              <div className="flex w-full flex-col gap-1 text-xs">
                 <Separator />
 
-                <div className="flex w-full justify-between py-3 ">
+                <div className="flex w-full justify-between py-3 lg:text-sm">
                   <p>Subtotal</p>
                   <p>R$ {subtotal.toFixed(2)}</p>
                 </div>
 
                 <Separator />
 
-                <div className=" flex w-full justify-between py-3">
+                <div className="flex w-full justify-between py-3 lg:text-sm">
                   <p>Entrega</p>
                   <p>GRÁTIS</p>
                 </div>
 
                 <Separator />
 
-                <div className=" flex w-full justify-between py-3">
+                <div className="flex w-full justify-between py-3 lg:text-sm">
                   <p>Descontos</p>
                   <p>-R$ {totalDiscount.toFixed(2)}</p>
                 </div>
 
                 <Separator />
 
-                <div className=" flex w-full justify-between py-3 text-sm font-bold lg:text-base">
+                <div className="flex w-full justify-between py-3 text-sm font-bold lg:text-base">
                   <p>Total</p>
                   <p>R$ {total.toFixed(2)}</p>
                 </div>
