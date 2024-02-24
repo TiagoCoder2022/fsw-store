@@ -40,7 +40,7 @@ const Sidebar = () => {
           <Button
             variant="outline"
             className={`flex w-full justify-start gap-2 ${
-              path.includes("/products") &&
+              path.includes("/categories") &&
               "bg-primary text-white hover:bg-primary"
             }`}
           >
@@ -49,11 +49,11 @@ const Sidebar = () => {
           </Button>
         </Link>
 
-        <Link href="/dashboard/products">
+        <Link href="/dashboard/orders">
           <Button
             variant="outline"
             className={`flex w-full justify-start gap-2 ${
-              path.includes("/products") &&
+              path.includes("/orders") &&
               "bg-primary text-white hover:bg-primary"
             }`}
           >
