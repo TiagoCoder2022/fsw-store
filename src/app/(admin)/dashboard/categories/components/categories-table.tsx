@@ -1,14 +1,16 @@
 import {
   Table,
   TableBody,
+  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Prisma } from "@prisma/client";
+import { ProductWithTotalPrice } from "@/helpers/product";
+import { Category, Prisma } from "@prisma/client";
 
-interface CategoriesTablePops {
+interface CategoriesTableProps {
   categories: Prisma.CategoryGetPayload<{
     include: {
       products: {
@@ -19,14 +21,15 @@ interface CategoriesTablePops {
     };
   }>[];
 }
-const CategoriesTable = ({ categories }: CategoriesTablePops) => {
+
+const CategoriesTable = ({ categories }: CategoriesTableProps) => {
   return (
     <Table>
       <TableHeader>
         <TableRow>
           <TableHead>Nome</TableHead>
           <TableHead>Categoria</TableHead>
-          <TableHead>Pocentagem das vendas</TableHead>
+          <TableHead>Porcentagem das vendas</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>

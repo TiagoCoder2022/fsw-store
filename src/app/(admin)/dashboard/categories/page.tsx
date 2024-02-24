@@ -14,6 +14,7 @@ const CategoriesPage = async () => {
       },
     },
   });
+
   return (
     <div className="flex w-full flex-col gap-10 p-10">
       <Badge variant="heading">
@@ -22,9 +23,11 @@ const CategoriesPage = async () => {
       </Badge>
 
       <div className="flex w-full items-center justify-between">
-        <p>Categorias encontradas: {categories.length}</p>
+        <p className="text-lg font-bold">
+          Categorias encontradas: {categories.length}
+        </p>
 
-        <Button>
+        <Button className="flex gap-2">
           <PlusIcon size={18} />
           Adicionar categoria
         </Button>
